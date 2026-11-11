@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body class="login">
+    <!--Animação de transição-->
+    <div class="page-transition" style="--transition-color: #2e0651;">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="container">
+
+        <h1>Login</h1>
+
+        <form id="form">
+
+            <input type="text" id="user" placeholder="Usuário" required>
+
+            <input type="password" id="pass" placeholder="Senha" required>
+
+            <button type="submit">Entrar</button>
+
+        </form>
+
+        <p>Não possui uma conta? <a href="/cadastro">Cadastre-se</a></p>
+
+    </div>
+
+    <script>
+
+        const form = document.querySelector("#form")
+
+        async function login(event) {
+
+            event.preventDefault()
+
+            const response = await fetch("/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username: form.user.value,
+                    password: form.pass.value
+                })
+            })
+
+            if (response.status === 404) {
+                alert("Usuário não encontrado")
+                return
+            }
+
+            if (response.status === 401) {
+                alert("Senha incorreta")
+                return
+            }
+
+            if (response.ok) {
+                window.location.href = "/home"
+                return
+            }
+
+            alert("Erro ao fazer login")
+        }
+
+        form.addEventListener("submit", login)
+
+    </script>
+    <!-- Script para animação de transição -->
+    <script>
+        const transition = document.querySelector(".page-transition")
+
+        document.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", event => {
+                const destino = link.getAttribute("href")
+
+                if (destino === "/" || destino === "/cadastro") {
+                    event.preventDefault()
+
+                    transition.classList.add("active")
+
+                    setTimeout(() => {
+                        window.location.href = destino
+                    }, 800)
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>
