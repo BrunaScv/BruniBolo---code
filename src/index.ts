@@ -20,6 +20,28 @@ const srv = Bun.serve({
 
         "/cadastro": cadastro,
 
+        "/slides": {
+            GET: (req) => {
+                const ses = req.cookies.get("ses") as string;
+                const user = loggedUsers[ses];
+
+                if (!user) {
+                    return Response.json(
+                        { msg: "Não autorizado" },
+                        { status: 401 }
+                    );
+                }
+
+                const query = db.query(`
+            SELECT id, image, text
+            FROM slides
+            WHERE user_id = ?
+        `);
+
+                return Response.json(query.all(user.id));
+            }
+        },
+
         "/user": {
             // ROTA NOVA: Lista os usuários do banco de dados
             GET: () => {
