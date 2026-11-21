@@ -2,8 +2,8 @@ import login from "../index.html"
 import home from "./home.html"
 import cadastro from "./cadastro.html"
 import { db } from "./db"
-import { mkdir, unlink } from "node:fs/promises"
-import { basename } from "node:path"
+import { mkdir, unlink } from "fs/promises"
+import { basename } from "path"
 
 type UserInput = {
     username?: string
@@ -34,6 +34,8 @@ const loggedUsers: Record<string, Omit<UserFromDb, "password_hash">> = {}
 const uploadDir = `${import.meta.dir}/uploads`
 
 function getLoggedUser(req: Request): Omit<UserFromDb, "password_hash"> | null {
+    const session = req.headers.get("cookie") // No Bun HTTP server moderno, pode-se ler cookies via req.cookies ou cabeçalhos
+    // Mantendo a compatibilidade com a sua estrutura de requisição:
     const sessionCookie = (req as any).cookies?.get("ses")
 
     if (!sessionCookie) {

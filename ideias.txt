@@ -1,0 +1,15 @@
+mandar um alert quando tentar cadastrar um mesmo usuario✅
+mandar um alert quando a senha é menor q 6✅
+testar as rotas no bruno, fizemos uma rota get para verificar os usuários e criamos uma lista deles✅
+keyframe pra transição da página e trocar os transitions⚠️
+rota de deletar usuários
+
+
+fazer um home diferente, um pro adm e um pro cliente⚠️
+começar a pagina posicionadno o slider no home, a cor vai ser a mesma do fundo de login⚠️
+slider sem borda, apenas comporta a foto, usar um rodapé igual em todas as paginas q aparecem pro cliente⚠️
+
+ideias
+https://www.rizzoconfeitaria.com.br/
+https://www.ofner.com.br/confeitaria
+https://www.lojasantoantonio.com.br/confeitaria?srsltid=AYCX9vIgFD1sXWQAppv37prxwfg-7MB_KKdWWU3YZFW6hrFXwQHL8viR

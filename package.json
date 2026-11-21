@@ -1,14 +1,27 @@
 {
   "name": "oqfizemoshoje2",
   "module": "src/index.ts",
+<<<<<<< HEAD
   "devDependencies": {
     "@types/bun": "^1.4.5",
     "@types/node": "^26.6.6",
     "typescript": "5.9.3"
   },
+=======
+  "type": "module",
+>>>>>>> 082bd643b8c096cec756d2c650954e6943b84c9f
   "private": true,
   "scripts": {
     "typecheck": "bun check"
   },
+<<<<<<< HEAD
   "type": "module"
+=======
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^7"
+  }
+>>>>>>> 082bd643b8c096cec756d2c650954e6943b84c9f
 }
