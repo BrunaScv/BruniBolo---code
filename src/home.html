@@ -1,0 +1,78 @@
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+
+<body>
+
+    <h1>HOME</h1>
+
+    <div class="profile">
+        <div class="nome"></div>
+        <div class="tipo-usuario"></div>
+    </div>
+
+    <div class="slider-wrapper">
+
+        <div class="container-slider">
+
+            <button id="prev-button">Anterior</button>
+
+            <div class="container-images" id="images"></div>
+
+            <button id="next-button">Próximo</button>
+
+        </div>
+
+        <p class="slider-text"></p>
+
+        <div class="controls" id="admin-controls" hidden>
+
+            <label for="image-input">Adicionar postagem</label>
+            <input type="file" id="image-input" accept="image/png,image/jpeg,image/webp,image/gif">
+
+            <button id="add-text">Editar descrição</button>
+
+            <button id="remove-image">Excluir postagem</button>
+
+        </div>
+
+    </div>
+
+    <script>
+        async function init() {
+            const response = await fetch("/login/user")
+
+            if (!response.ok) {
+                alert("Você precisa fazer login!")
+                location.href = "/"
+                return
+            }
+
+            const user = await response.json()
+
+            document.querySelector(".profile .nome").textContent =
+                "Olá, " + user.username
+
+            document.querySelector(".profile .tipo-usuario").textContent =
+                user.role === "admin" ? "Administrador" : "Usuário"
+
+            if (user.role === "admin") {
+                document.querySelector("#admin-controls").hidden = false
+            }
+        }
+
+        init()
+    </script>
+
+    <script type="module" src="./slider.ts"></script>
+
+</body>
+</html>

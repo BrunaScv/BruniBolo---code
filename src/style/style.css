@@ -1,0 +1,232 @@
+/* askljdhaskjdh */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.cadastro {
+    background-color: #893293;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.login {
+    background-color: #2e0651;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #2e0651;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: white;
+    padding: 30px;
+    width: 320px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 25px;
+    color: #983aa8;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #3e2365;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+p {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #666;
+}
+
+a {
+    color: #2d1049;
+}
+
+
+
+/* Transição entre páginas da calda */
+.page-transition {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+
+    background: var(--transition-color, #8b4513);
+
+    clip-path: inset(0 0 100% 0);
+
+    animation: none;
+}
+
+
+/* TRANSIÇÃO DE CALDA */
+
+.page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 9999;
+    pointer-events: none;
+
+    background: var(--transition-color, #8b4513);
+
+    transform: translateY(-105%);
+
+    border-radius: 0 0 45% 25% / 0 0 7% 5%;
+
+    visibility: hidden;
+}
+
+/* ATIVAR ANIMAÇÃO */
+
+.page-transition.active {
+    visibility: visible;
+    animation: syrup-cover 1.1s cubic-bezier(.65, 0, .35, 1) forwards;
+}
+
+/* GOTINHAS */
+
+.page-transition span {
+    position: absolute;
+    bottom: -45px;
+
+    background: var(--transition-color, #8b4513);
+
+    border-radius: 0 0 50% 50%;
+
+    transform: scaleY(0);
+    transform-origin: top;
+}
+
+/* TAMANHOS E POSIÇÕES */
+
+.page-transition span:nth-child(1) {
+    left: 12%;
+    width: 45px;
+    height: 75px;
+}
+
+.page-transition span:nth-child(2) {
+    left: 48%;
+    width: 65px;
+    height: 110px;
+}
+
+.page-transition span:nth-child(3) {
+    left: 82%;
+    width: 38px;
+    height: 65px;
+}
+
+/* CALDA DESCENDO */
+
+@keyframes syrup-cover {
+    0% {
+        transform: translateY(-105%);
+    }
+
+    70% {
+        transform: translateY(0);
+    }
+
+    85% {
+        transform: translateY(-2%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* GOTAS ESCORRENDO */
+
+.page-transition.active span:nth-child(1) {
+    animation: syrup-drop .65s ease-out .15s forwards;
+}
+
+.page-transition.active span:nth-child(2) {
+    animation: syrup-drop .75s ease-out .05s forwards;
+}
+
+.page-transition.active span:nth-child(3) {
+    animation: syrup-drop .6s ease-out .25s forwards;
+}
+
+@keyframes syrup-drop {
+    0% {
+        transform: scaleY(0);
+    }
+
+    60% {
+        transform: scaleY(1.15);
+    }
+
+    80% {
+        transform: scaleY(.9);
+    }
+
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* Container das imagens do carrossel */
+.container-images {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+/* Esconde todas as imagens por padrão */
+.container-images img.slider-img {
+    display: none;
+    width: 100%;
+    max-height: 350px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* Mostra apenas a imagem ativa que recebeu a classe .on */
+.container-images img.slider-img.on {
+    display: block;
+}
