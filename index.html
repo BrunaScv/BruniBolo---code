@@ -4,16 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="src/style/style.css">
+    <link rel="stylesheet" href="./src/style/style.css">
 </head>
 
 <body class="login">
-    <!--Animação de transição-->
-    <div class="page-transition" style="--transition-color: #2e0651;">
-        <span></span>
+
+    <!-- Animação de transição -->
+    <div class="page-transition" style="--transition-color: #893293;"> <span></span>
         <span></span>
         <span></span>
     </div>
+
     <div class="container">
 
         <h1>Login</h1>
@@ -32,13 +33,15 @@
 
     </div>
 
+    <script type="module" src="./src/transition.ts"></script>
+
     <script>
 
-        const form = document.querySelector("#form")
+        const form = document.querySelector("#form");
 
         async function login(event) {
 
-            event.preventDefault()
+            event.preventDefault();
 
             const response = await fetch("/login", {
                 method: "POST",
@@ -49,31 +52,30 @@
                     username: form.user.value,
                     password: form.pass.value
                 })
-            })
+            });
 
             if (response.status === 404) {
-                alert("Usuário não encontrado")
-                return
+                alert("Usuário não encontrado");
+                return;
             }
 
             if (response.status === 401) {
-                alert("Senha incorreta")
-                return
+                alert("Senha incorreta");
+                return;
             }
 
             if (response.ok) {
-                window.transitionPage("/home")
-                return
+                window.transitionPage("/home");
+                return;
             }
 
-            alert("Erro ao fazer login")
+            alert("Erro ao fazer login");
         }
 
-        form.addEventListener("submit", login)
+        form.addEventListener("submit", login);
 
     </script>
-    <!-- Script para animação de transição -->
-    <script type="module" src="./src/transition.ts"></script>
+
 </body>
 
 </html>

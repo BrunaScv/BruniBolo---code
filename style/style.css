@@ -73,21 +73,21 @@ a {
 
 
 
-/* Transição entre páginas da calda */
-
+/* Transição líquida */
 .page-transition {
     position: fixed;
     inset: 0;
-    background: #893293;
+    background: var(--transition-color);
     z-index: 9999;
     transform: scaleY(0);
-    transform-origin: top;
+    transform-origin: bottom;
     pointer-events: none;
+    overflow: visible;
 }
 
 .page-transition span {
     position: absolute;
-    background: #893293;
+    background: var(--transition-color);
     border-radius: 50%;
 }
 
@@ -112,6 +112,7 @@ a {
     bottom: -35px;
 }
 
+/* Calda preenchendo a tela */
 .page-transition.active {
     animation: liquidFill 0.8s ease-in forwards;
 }
@@ -133,11 +134,20 @@ a {
         transform: scaleY(1);
     }
 }
-/* Cor da calda */
-.page-transition {
-    background: var(--transition-color);
+
+/* Calda desaparecendo na nova página */
+.page-transition.reveal {
+    transform: scaleY(1);
+    transform-origin: top;
+    animation: liquidReveal 0.8s ease-out forwards;
 }
 
-.page-transition span {
-    background: var(--transition-color);
+@keyframes liquidReveal {
+    from {
+        transform: scaleY(1);
+    }
+
+    to {
+        transform: scaleY(0);
+    }
 }

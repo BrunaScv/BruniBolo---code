@@ -1,47 +1,52 @@
-function transitionPage(destination: string): void {
-    const transition = document.querySelector<HTMLDivElement>(
-        ".page-transition"
-    )
 
-    if (!transition) {
-        window.location.href = destination
-        return
-    }
+const transition = document.querySelector<HTMLElement>(".page-transition");
 
-    transition.classList.remove("active")
-
-    // Reinicia a animação
-    void transition.offsetWidth
-
-    transition.classList.add("active")
-
-    setTimeout(() => {
-        window.location.href = destination
-    }, 1100)
-}
-
-// Torna a função acessível aos outros scripts
 declare global {
     interface Window {
-        transitionPage: (destination: string) => void
+        transitionPage: (url: string) => void;
     }
 }
 
-window.transitionPage = transitionPage
+window.transitionPage = (url: string) => {
 
-// Animação dos links
-document.querySelectorAll<HTMLAnchorElement>("a[href]").forEach(link => {
+    if (!transition) {
+        window.location.href = url;
+        return;
+    }
+
+    // Identifica a cor da página de destino
+    const destino = url === "/cadastro" || url === "/cadastro.html"
+        ? "#893293"
+        : "#2e0651";
+
+    // Define a cor da calda
+    transition.style.setProperty("--transition-color", destino);
+
+    // Reinicia a animação
+    transition.classList.remove("active");
+
+    void transition.offsetWidth;
+
+    transition.classList.add("active");
+
+    // Abre a próxima página depois de cobrir a tela
+    setTimeout(() => {
+        window.location.href = url;
+    }, 900);
+};
+
+// Transição nos links
+document.querySelectorAll<HTMLAnchorElement>("a").forEach(link => {
+
     link.addEventListener("click", event => {
-        const destination = link.href
-        const url = new URL(destination)
 
-        if (url.origin !== window.location.origin) return
-        if (link.target === "_blank") return
-        if (link.hasAttribute("download")) return
-        if (destination === window.location.href) return
+        const url = link.getAttribute("href");
 
-        event.preventDefault()
+        if (url && url.startsWith("/") && !link.target) {
+            event.preventDefault();
+            window.transitionPage(url);
+        }
 
-        transitionPage(destination)
-    })
-})
+    });
+
+});
