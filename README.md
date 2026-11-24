@@ -12,4 +12,7 @@ Assim, qualquer pessoa que criar uma conta receberá automaticamente o papel de 
  db.query(` UPDATE users SET role = 'admin' WHERE username = ? `).run("SEU_USUARIO")
  dps tem que remover esse bloco de código pra n ficar fazendo a mesma alteração toda e sobrecarregando a API
    Troque SEU_USUARIO pelo nome exato da conta que você cadastrou.
- Para conferir: SELECT id, username, role FROM users;  To install dependencies: ```bash bun install ``` To run: ```bash bun run src/index.ts ```
+ Para conferir: SELECT id, username, role FROM users;
+
+ 
+ To install dependencies: ```bash bun install ``` To run: ```bash bun run src/index.ts ```
