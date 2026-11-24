@@ -1,1 +1,15 @@
-. Como transformar uma conta em administrador? Essa parte é importante: não vamos colocar um campo de administrador no cadastro. Assim, qualquer pessoa que criar uma conta receberá automaticamente o papel de usuário comum. Para escolher sua conta como administradora: 1. Execute o projeto e faça seu cadastro normalmente. 2. Abra o banco src/db.sqlite em um visualizador SQLite, como o DB Browser for SQLite. 3. Abra a aba de execução SQL. 4. Execute: no index.ts db.query(` UPDATE users SET role = 'admin' WHERE username = ? `).run("SEU_USUARIO") dps tem que remover esse bloco de código pra n ficar fazendo a mesma alteração toda e sobrecarregando a API Troque SEU_USUARIO pelo nome exato da conta que você cadastrou. Para conferir: SELECT id, username, role FROM users;  To install dependencies: ```bash bun install ``` To run: ```bash bun run src/index.ts ```
+<img width="823" height="698" alt="image" src="https://github.com/user-attachments/assets/828367d5-bf96-48c5-9d8d-894215e9cd04" />
+
+ 
+ Como transformar uma conta em administrador? 
+Essa parte é importante: não vamos colocar um campo de administrador no cadastro. 
+Assim, qualquer pessoa que criar uma conta receberá automaticamente o papel de usuário comum. Para escolher sua conta como administradora: 
+1. Execute o projeto e faça seu cadastro normalmente.
+2.  Abra o banco src/db.sqlite em um visualizador SQLite, como o DB Browser for SQLite.
+3.  Abra a aba de execução SQL.
+4.  Execute:
+    no index.ts
+ db.query(` UPDATE users SET role = 'admin' WHERE username = ? `).run("SEU_USUARIO")
+ dps tem que remover esse bloco de código pra n ficar fazendo a mesma alteração toda e sobrecarregando a API
+   Troque SEU_USUARIO pelo nome exato da conta que você cadastrou.
+ Para conferir: SELECT id, username, role FROM users;  To install dependencies: ```bash bun install ``` To run: ```bash bun run src/index.ts ```
