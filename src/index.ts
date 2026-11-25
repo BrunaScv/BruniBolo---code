@@ -23,11 +23,11 @@ type SlideFromDb = {
     text: string
 }
 
-db.query(`
-    UPDATE users
-    SET role = 'admin'
-    WHERE username = ?
-`).run("BruniBolo")
+// db.query(`
+//     UPDATE users
+//     SET role = 'admin'
+//     WHERE username = ?
+// `).run("BruniBolo")
 
 const loggedUsers: Record<string, Omit<UserFromDb, "password_hash">> = {}
 
@@ -178,6 +178,7 @@ const srv = Bun.serve({
 
         // LISTAR POSTAGENS
         "/slides": {
+            // caso fossemos fazer um gerenciamento do adm das imagens
             GET: (req) => {
                 const user = getLoggedUser(req)
 

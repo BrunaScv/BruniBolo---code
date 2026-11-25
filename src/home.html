@@ -1,16 +1,55 @@
 
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Home</title>
+
     <link rel="stylesheet" href="./style/style.css">
 </head>
 
 <body>
+
+    <!-- FILTRO DA CALDA -->
+
+    <svg xmlns="http://www.w3.org/2000/svg"
+         style="position: absolute; width: 0; height: 0;">
+
+        <defs>
+            <filter id="gooey">
+
+                <feGaussianBlur
+                    in="SourceGraphic"
+                    stdDeviation="12"
+                    result="blur" />
+
+                <feColorMatrix
+                    in="blur"
+                    mode="matrix"
+                    values="
+                        1 0 0 0 0
+                        0 1 0 0 0
+                        0 0 1 0 0
+                        0 0 0 25 -10"
+                    result="gooey" />
+
+                <feComposite
+                    in="SourceGraphic"
+                    in2="gooey"
+                    operator="atop" />
+
+            </filter>
+        </defs>
+
+    </svg>
+
+    <!-- TRANSIÇÃO DE CALDA -->
+
+    <div class="page-transition" style="--transition-color: #2e0651;">
+    </div>
 
     <h1>HOME</h1>
 
@@ -36,7 +75,11 @@
         <div class="controls" id="admin-controls" hidden>
 
             <label for="image-input">Adicionar postagem</label>
-            <input type="file" id="image-input" accept="image/png,image/jpeg,image/webp,image/gif">
+
+            <input
+                type="file"
+                id="image-input"
+                accept="image/png,image/jpeg,image/webp,image/gif">
 
             <button id="add-text">Editar descrição</button>
 
@@ -46,33 +89,44 @@
 
     </div>
 
+    <!-- TRANSIÇÃO -->
+
+    <script type="module" src="./transition.ts"></script>
+
+    <!-- INFORMAÇÕES DO USUÁRIO -->
+
     <script>
+
         async function init() {
-            const response = await fetch("/login/user")
+
+            const response = await fetch("/login/user");
 
             if (!response.ok) {
-                alert("Você precisa fazer login!")
-                location.href = "/"
-                return
+                alert("Você precisa fazer login!");
+                location.href = "/";
+                return;
             }
 
-            const user = await response.json()
+            const user = await response.json();
 
             document.querySelector(".profile .nome").textContent =
-                "Olá, " + user.username
+                "Olá, " + user.username;
 
             document.querySelector(".profile .tipo-usuario").textContent =
-                user.role === "admin" ? "Administrador" : "Usuário"
+                user.role === "admin" ? "Administrador" : "Usuário";
 
             if (user.role === "admin") {
-                document.querySelector("#admin-controls").hidden = false
+                document.querySelector("#admin-controls").hidden = false;
             }
+
         }
 
-        init()
+        init();
+
     </script>
 
     <script type="module" src="./slider.ts"></script>
 
 </body>
+
 </html>

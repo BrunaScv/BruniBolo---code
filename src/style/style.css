@@ -1,5 +1,6 @@
-
-/* CONFIGURAÇÕES GERAIS */
+/* =====================================
+   CONFIGURAÇÕES GERAIS
+===================================== */
 
 * {
     margin: 0;
@@ -7,27 +8,31 @@
     box-sizing: border-box;
 }
 
-/* PÁGINA DE CADASTRO */
+/* =====================================
+   PÁGINA DE CADASTRO
+===================================== */
 
 .cadastro {
     background-color: #893293;
     color: white;
     text-align: center;
     padding: 20px;
-    border-radius: 10px;
 }
 
-/* PÁGINA DE LOGIN */
+/* =====================================
+   PÁGINA DE LOGIN
+===================================== */
 
 .login {
     background-color: #2e0651;
     color: white;
     text-align: center;
     padding: 20px;
-    border-radius: 10px;
 }
 
-/* BODY */
+/* =====================================
+   BODY
+===================================== */
 
 body {
     font-family: Arial, sans-serif;
@@ -35,10 +40,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
-/* CONTAINER */
+/* =====================================
+   CONTAINER
+===================================== */
 
 .container {
     background-color: white;
@@ -53,7 +60,9 @@ h1 {
     color: #983aa8;
 }
 
-/* INPUTS */
+/* =====================================
+   INPUTS
+===================================== */
 
 input {
     width: 100%;
@@ -63,7 +72,9 @@ input {
     border-radius: 5px;
 }
 
-/* BOTÕES */
+/* =====================================
+   BOTÕES
+===================================== */
 
 button {
     width: 100%;
@@ -73,9 +84,16 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color .2s ease;
 }
 
-/* TEXTOS E LINKS */
+button:hover {
+    background-color: #893293;
+}
+
+/* =====================================
+   TEXTOS E LINKS
+===================================== */
 
 p {
     margin-top: 20px;
@@ -88,7 +106,7 @@ a {
 }
 
 /* =====================================
-   TRANSIÇÃO DE CALDA
+   TRANSIÇÃO LÍQUIDA
 ===================================== */
 
 .page-transition {
@@ -96,138 +114,111 @@ a {
     inset: 0;
     width: 100%;
     height: 100%;
-    z-index: 9999;
+    z-index: 99999;
     pointer-events: none;
-
-    background: var(--transition-color);
-
-    transform: translateY(-110%);
     visibility: hidden;
+    overflow: hidden;
+    transform: translateZ(0);
 
-    border-radius: 0 0 48% 35% / 0 0 12% 10%;
-    overflow: visible;
+    --transition-color: #2e0651;
 }
-
-/* CALDA COBRINDO A TELA */
 
 .page-transition.active {
     visibility: visible;
-    animation: syrup-cover 1.1s cubic-bezier(.76, 0, .24, 1) forwards;
 }
 
-/* GOTAS DA CALDA */
+/* CORPO PRINCIPAL DA CALDA */
 
-.page-transition span {
+.page-transition::before {
+    content: "";
     position: absolute;
-    top: 85%;
 
-    background: var(--transition-color);
+    width: 160%;
+    height: 160%;
 
-    transform: scaleY(0);
-    transform-origin: top;
+    left: -30%;
+    bottom: -5%;
 
-    border-radius: 0 0 50% 50%;
+    background:
+        radial-gradient(ellipse at 25% 15%,
+            rgba(255, 255, 255, .16),
+            transparent 35%),
+        radial-gradient(ellipse at 75% 35%,
+            rgba(255, 255, 255, .08),
+            transparent 40%),
+        linear-gradient(145deg,
+            rgba(255, 255, 255, .08),
+            transparent 35%,
+            rgba(0, 0, 0, .12)),
+        var(--transition-color);
+
+    border-radius: 48% 52% 0 0 / 13% 18% 0 0;
+
+    transform: translateY(-110%) rotate(0deg);
+    transform-origin: center bottom;
+
+    box-shadow:
+        0 -15px 35px rgba(255, 255, 255, .12),
+        0 -5px 20px rgba(0, 0, 0, .12);
 }
 
-/* GOTA 1 */
+/* ATIVAÇÃO */
 
-.page-transition span:nth-child(1) {
-    left: 12%;
-    width: 75px;
-    height: 170px;
-    border-radius: 45% 55% 50% 50%;
-}
-
-/* GOTA 2 */
-
-.page-transition span:nth-child(2) {
-    left: 43%;
-    width: 110px;
-    height: 230px;
-    border-radius: 50% 50% 45% 55%;
-}
-
-/* GOTA 3 */
-
-.page-transition span:nth-child(3) {
-    right: 13%;
-    width: 65px;
-    height: 145px;
-    border-radius: 55% 45% 50% 50%;
+.page-transition.active::before {
+    animation: calda 1.2s cubic-bezier(.65, 0, .25, 1) forwards;
 }
 
 /* MOVIMENTO DA CALDA */
-
-@keyframes syrup-cover {
+@keyframes calda {
     0% {
-        transform: translateY(-110%);
-        border-radius: 0 0 48% 35% / 0 0 12% 10%;
+        transform: translateY(-110%) rotate(0deg) scaleY(1);
+        border-radius: 0 0 45% 55% / 0 0 18% 12%;
+    }
+
+    12% {
+        transform: translateY(-90%) rotate(-0.4deg) scaleY(1.05);
+        border-radius: 0 0 60% 40% / 0 0 25% 15%;
     }
 
     25% {
-        transform: translateY(-75%);
-        border-radius: 0 0 55% 30% / 0 0 18% 12%;
+        transform: translateY(-65%) rotate(1deg) scaleY(1.08);
+        border-radius: 0 0 35% 65% / 0 0 12% 25%;
     }
 
-    45% {
-        transform: translateY(-25%);
-        border-radius: 0 0 35% 55% / 0 0 18% 12%;
-    }
-
-    70% {
-        transform: translateY(0);
-        border-radius: 0 0 15% 25% / 0 0 8% 12%;
-    }
-
-    85% {
-        transform: translateY(-1%);
-        border-radius: 0;
-    }
-
-    100% {
-        transform: translateY(0);
-        border-radius: 0;
-    }
-}
-
-/* ANIMAÇÃO DAS GOTAS */
-
-.page-transition.active span:nth-child(1) {
-    animation: syrup-drop .8s ease-in .05s forwards;
-}
-
-.page-transition.active span:nth-child(2) {
-    animation: syrup-drop .95s ease-in .02s forwards;
-}
-
-.page-transition.active span:nth-child(3) {
-    animation: syrup-drop .75s ease-in .12s forwards;
-}
-
-@keyframes syrup-drop {
-    0% {
-        transform: scaleY(0);
+    40% {
+        transform: translateY(-40%) rotate(-1.5deg) scaleY(1.04);
+        border-radius: 0 0 65% 35% / 0 0 22% 10%;
     }
 
     55% {
-        transform: scaleY(1.15);
+        transform: translateY(-20%) rotate(1.3deg) scaleY(1.02);
+        border-radius: 0 0 40% 60% / 0 0 15% 25%;
     }
 
-    75% {
-        transform: scaleY(.9);
+    70% {
+        transform: translateY(-5%) rotate(-1deg) scaleY(1.03);
+        border-radius: 0 0 55% 45% / 0 0 20% 12%;
+    }
+
+    82% {
+        transform: translateY(2%) rotate(1deg) scaleY(.99);
+        border-radius: 0 0 48% 52% / 0 0 12% 18%;
+    }
+
+    92% {
+        transform: translateY(-1%) rotate(-.4deg) scaleY(1.01);
+        border-radius: 0 0 52% 48% / 0 0 16% 14%;
     }
 
     100% {
-        transform: scaleY(1);
+        transform: translateY(0) rotate(0deg) scaleY(1);
+        border-radius: 0 0 50% 50% / 0 0 10% 10%;
     }
 }
 
-
-/* ================================= */
-/* CARROSSEL DE IMAGENS */
-/* ================================= */
-
-/* Container das imagens */
+/* =====================================
+   CARROSSEL DE IMAGENS
+===================================== */
 
 .container-images {
     width: 100%;
@@ -238,8 +229,6 @@ a {
     margin: 15px 0;
 }
 
-/* Esconde todas as imagens */
-
 .container-images img.slider-img {
     display: none;
     width: 100%;
@@ -248,8 +237,18 @@ a {
     border-radius: 8px;
 }
 
-/* Mostra a imagem ativa */
-
 .container-images img.slider-img.on {
     display: block;
+}
+
+/* =====================================
+   ACESSIBILIDADE
+===================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .page-transition.active::before,
+    .page-transition.active::after {
+        animation-duration: .4s;
+    }
 }

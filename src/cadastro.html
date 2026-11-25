@@ -1,20 +1,58 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Cadastro</title>
+
     <link rel="stylesheet" href="./style/style.css">
 </head>
 
 <body class="cadastro">
 
-    <!-- Animação de transição -->
+    <!-- FILTRO DA CALDA -->
+
+    <svg xmlns="http://www.w3.org/2000/svg"
+         style="position: absolute; width: 0; height: 0;">
+
+        <defs>
+            <filter id="gooey">
+
+                <feGaussianBlur
+                    in="SourceGraphic"
+                    stdDeviation="12"
+                    result="blur" />
+
+                <feColorMatrix
+                    in="blur"
+                    mode="matrix"
+                    values="
+                        1 0 0 0 0
+                        0 1 0 0 0
+                        0 0 1 0 0
+                        0 0 0 25 -10"
+                    result="gooey" />
+
+                <feComposite
+                    in="SourceGraphic"
+                    in2="gooey"
+                    operator="atop" />
+
+            </filter>
+        </defs>
+
+    </svg>
+
+    <!-- TRANSIÇÃO DE CALDA -->
+
     <div class="page-transition" style="--transition-color: #2e0651;">
-        <span></span>
-        <span></span>
-        <span></span>
+
     </div>
+
+    <!-- CONTAINER -->
 
     <div class="container">
 
@@ -22,19 +60,34 @@
 
         <form id="formulario">
 
-            <input type="text" id="username" placeholder="Nome" required>
+            <input
+                type="text"
+                id="username"
+                placeholder="Nome"
+                required>
 
-            <input type="password" id="password" placeholder="Senha" required>
+            <input
+                type="password"
+                id="password"
+                placeholder="Senha"
+                required>
 
             <button type="submit">Cadastrar</button>
 
         </form>
 
-        <p>Já possui uma conta? <a href="/">Faça login</a></p>
+        <p>
+            Já possui uma conta?
+            <a href="/">Faça login</a>
+        </p>
 
     </div>
 
+    <!-- TRANSIÇÃO -->
+
     <script type="module" src="./transition.ts"></script>
+
+    <!-- CADASTRO -->
 
     <script>
 
@@ -46,29 +99,42 @@
             const password = document.querySelector("#password").value;
 
             const response = await fetch("/user", {
+
                 method: "POST",
+
                 headers: {
                     "Content-Type": "application/json"
                 },
+
                 body: JSON.stringify({
                     username,
                     password
                 })
+
             });
 
             const data = await response.json();
 
             if (response.ok) {
+
                 alert("Usuário cadastrado com sucesso!");
+
                 window.transitionPage("/");
+
             } else {
+
                 alert(data.msg || "Erro ao cadastrar usuário");
+
             }
+
         }
 
         formulario.addEventListener("submit", async (event) => {
+
             event.preventDefault();
+
             await Cadastrar();
+
         });
 
     </script>
